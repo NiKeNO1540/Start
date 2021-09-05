@@ -19,7 +19,7 @@ Background = Color3.fromRGB(24, 24, 24),
 Glow = Color3.fromRGB(255, 0, 0),
 Accent = Color3.fromRGB(252, 42, 42),
 LightContrast = Color3.fromRGB(255, 10, 10),
-DarkContrast = Color3.fromRGB(255, 14, 14),  
+DarkContrast = Color3.fromRGB(14, 14, 14),  
 TextColor = Color3.fromRGB(255, 255, 255)
 }
 
