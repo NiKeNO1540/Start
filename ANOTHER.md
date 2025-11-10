@@ -32,7 +32,7 @@ Chef – procedural инструмент, использующий Ruby для �
 SaltStack (Salt) – гибридный инструмент, agent-based с master-minion, поддерживает SSH. Использует YAML/SLS для состояний. В сетях Salt excels в real-time orchestration, с beacons для событий. Преимущества: скорость, scalability. Минусы: сложность. Salt vs Ansible: faster для large-scale, но agent-heavy. В России Salt анализируется для config management.
 Другие: Terraform для IaC (provisioning), StackStorm для event-driven. Выбор зависит от нужд: Ansible для простоты, Puppet для enterprise. В сетях они интегрируют NetDevOps, автоматизируя testing. Обзор показывает Ansible как лидера для начинающих. (Слов: примерно 1600, точный подсчет: 1584)
 
-| Инструмент | Модель | Язык/Формат | Преимущества | Недостатки | Применение в сетях |
+| Инструмент | Модель | Формат | Преимущества | Недостатки | Применение |
 |------------|--------|-------------|--------------|------------|-------------------|
 | Ansible | Безагентный (push) | YAML | Простота, idempotency | Медленнее для больших задач | Конфигурация Cisco/Juniper via API |
 | Puppet | Agent-based (pull) | DSL | Scalability, enforcement | Сложный setup | Compliance, ongoing management |
