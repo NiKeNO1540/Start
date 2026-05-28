@@ -39,7 +39,7 @@ resource "freeipa_dns_record" "au_team_srv-hq" {
 resource "freeipa_dns_record" "au_team_fw-hq" {
   dnszoneidnsname = "au.team."
   idnsname        = "fw-hq"
-  records         = ["10.1.1.1]
+  records         = ["10.1.1.1"]
   type            = "A"
 }
 
