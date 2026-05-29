@@ -1,3 +1,44 @@
+cat <<EOF > terraform.tf
+terraform {
+  required_providers {
+    freeipa = {
+      source  = "camptocamp/freeipa"
+      version = "1.0.0"
+    }
+  }
+}
+EOF
+cat <<EOF > providers.tf
+provider "freeipa" {
+  host     = var.freeipa_host
+  username = var.freeipa_username
+  password = var.freeipa_username_password
+  insecure = true
+}
+EOF
+cat <<EOF > variable.tf
+variable "freeipa_host" {
+  type        = string
+  description = "Access to the FreeIPA host"
+}
+
+variable "freeipa_username" {
+  type        = string
+  description = "Access to the FreeIPA host username"
+}
+
+variable "freeipa_username_password" {
+  type        = string
+  description = "Access to the FreeIPA host username password"
+  sensitive   = true
+}
+EOF
+cat <<EOF > terraform.tfvars
+freeipa_host              = "srv-hq.au.team"
+freeipa_username          = "admin"
+freeipa_username_password = "P@ssw0rd"
+EOF
+terraform init
 cat <<EOF >> variable.tf
 
 variable "reverse_zones" {
