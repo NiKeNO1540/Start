@@ -109,3 +109,29 @@ variable "dns_records" {
   ]
 }
 EOF
+
+
+cat <<EOF > dns.tf
+resource "freeipa_dns_zone" "reverse" {
+  for_each  = toset(var.reverse_zones)
+  zone_name = each.value
+}
+
+resource "freeipa_dns_record" "a" {
+  for_each        = { for r in var.dns_records : r.hostname => r }
+  dnszoneidnsname = each.value.forward_zone
+  idnsname        = each.value.hostname
+  records         = [each.value.ip_address]
+  type            = "A"
+}
+
+resource "freeipa_dns_record" "ptr" {
+  for_each        = { for r in var.dns_records : r.hostname => r }
+  dnszoneidnsname = each.value.reverse_zone
+  idnsname        = each.value.reverse_zone_record
+  records         = ["${each.value.hostname}.${each.value.forward_zone}"]
+  type            = "PTR"
+
+  depends_on = [freeipa_dns_zone.reverse]
+}
+EOF
