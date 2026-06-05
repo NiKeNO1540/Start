@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd /home/user/ansible
-python3 -m venv venv/ansible
 source venv/ansible/bin/activate
 cat << EOF > playbook1_keepalived.yml
 - name: Install and settings keepalived for HA1-COD and HA2-COD
@@ -113,12 +112,6 @@ keepalived_interface_name: "ens1"
 keepalived_virtual_ipaddress: "172.16.1.253/23"
 EOF
 
-for i in ha1 ha2 srv1 srv2 srv3;
-do
-ping -c3 $i-cod
-done
-ansible-playbook -i inventories/production/hosts playbook1_keepalived.yml 
-
 cat <<EOF > playbook2_web.yml
 ---
 - name: Install Installing the Angie Web Server
@@ -157,13 +150,6 @@ cat <<EOF > templates/index.html.j2
    </body>
 </html>
 EOF
-
-for i in ha1 ha2 srv1 srv2 srv3;
-do
-ping -c3 $i-cod
-done
-
-ansible-playbook -i inventories/production/hosts playbook2_web.yml 
 
 cat <<EOF > playbook3_haproxy.yml
 ---
@@ -248,8 +234,3 @@ for i in ha1 ha2 srv1 srv2 srv3;
 do
 ping -c3 $i-cod
 done
-
-ansible-playbook -i inventories/production/hosts playbook3_haproxy.yml
-
-echo 'P@ssw0rd' | kinit admin
-ipa dnsrecord-add au.team. www --cname=fw-hq.au.team
